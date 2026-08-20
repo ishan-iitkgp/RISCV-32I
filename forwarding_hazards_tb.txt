@@ -1,0 +1,26 @@
+00000013        //null   should alwyas be present (1st instruction)
+  
+//00500093      //addi x1 x0 5                                                                                                     ///raw hazs
+//00D00113     //addi x2 x0 13
+//00508193     //addi x3 x1 5        checks raw for rw -> ex                                                
+//00600213     //addi x4 x0 6
+//01110293     //addi x5 x2 17     checks if writing in negative cycle                            
+//FE228313    //addi x6 x5 -30    checks raw for ma -> ex                                                   ///works
+
+
+//01300093     //addi x1 x0 19                                                                                                   ///load use and rw<-ma
+//00102623     // store x1 12(x0)    checks rw -> ma                            
+//00C02383    // load x7 12(x0)   
+//FEB38413   // addi x8 x7 -21     load use hazard adds bubble                                       ///works
+
+
+//00500093     //addi x1 x0 5                                                                                                    ///b-type  no need to check j type cl same
+//00500113     //addi x2 x0 5
+//00208863     //beq x1 x2 16      also checks if 2 forwardings can happen together
+//00D00113    //addi x2 x0 13     dead instructions (to be flushed out)  
+//00D00113    //addi x2 x0 13     di 
+//00000013    //null 
+//00508193    //addi x3 x2 5       (kind of check for btype instructions)                           ///works      
+
+
+  
