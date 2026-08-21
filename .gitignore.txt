@@ -1,1 +1,10 @@
 *.vcd
+# Icarus Verilog execution binaries
+*.vvp
+*.out
+a.out
+# Waveform dumps 
+*.vcd
+*.lxt
+*.fst
+
